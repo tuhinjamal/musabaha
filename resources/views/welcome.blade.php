@@ -138,6 +138,9 @@ $count=1;
       <li class="nav-item">
         <a class="nav-link" href="#section3"> Contact</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#musabaha"> Musabaha</a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -184,6 +187,33 @@ $count=1;
   
 @endforeach
 </div>
+<div id="musabaha" class="container-fluid bg-secondary text-white" style="padding:100px 20px;">
+  @foreach($musabaha as $musabaha)
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">name</th>
+          <th scope="col">para</th>
+          <th scope="col">sura</th>
+          <th scope="col">ayat</th>
+          <th scope="col">description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">{{$musabaha->id}}</th>
+          <td>{{$musabaha->name}}</td>
+          <td>{{$musabaha->para}}</td>
+          <td>{{$musabaha->sura}}</td>
+          <td>{{$musabaha->ayat}}</td><br>
+          {{$musabaha->description}}
+        </tr>
+
+      </tbody>
+    </table>
+  @endforeach
+  </div>
 
 
 

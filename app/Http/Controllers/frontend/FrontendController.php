@@ -5,9 +5,11 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MusabahaController;
 use App\Http\Controllers\Admin\LogosController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Models\User;
+use App\Models\Musabaha;
 use App\Models\Portfolio;
 use App\Models\LogosModel;
 use App\Models\Slider;
@@ -32,6 +34,8 @@ class FrontendController extends Controller
          $data['portfolio'] = Portfolio::all();
          $data['about'] = About::all();
          $data['contact'] = Contact::all();
+         $data['musabaha'] = Musabaha::all();
+
          
         
     return view('welcome',$data);
