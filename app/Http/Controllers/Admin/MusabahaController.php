@@ -9,7 +9,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Alert;
 use Auth;
 
-#use DB;
+use DB;
 
 class MusabahaController extends Controller
 {
@@ -87,4 +87,5 @@ class MusabahaController extends Controller
          
          return redirect()->route('musabaha.view');
      }
+     
 }

@@ -84,6 +84,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware'=>'is_admin'
         Route::get('/edit/{id}','MusabahaController@edit')->name('musabaha.edit');
         Route::post('/update/{id}','MusabahaController@update')->name('musabaha.update');
         Route::get('/delete/{id}','MusabahaController@delete')->name('musabaha.delete');
+        Route::get('/view','MusabahaController@view')->name('musabaha.view');
 
     });
 

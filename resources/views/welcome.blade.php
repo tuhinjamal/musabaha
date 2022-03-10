@@ -142,7 +142,10 @@ $count=1;
         <a class="nav-link" href="#musabaha"> Musabaha</a>
       </li>
     </ul>
+    
   </div>
+  
+ 
 </nav>
 
 
@@ -181,6 +184,10 @@ $count=1;
 
 
 <div id="section2" class="container-fluid bg-secondary text-white" style="padding:100px 20px;">
+  <form class="form-inline" action=" {{url('/search')}} ">
+    <input class="form-control mr-sm-2" type="search" name="search" value=" {{"/search"}} " placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+  </form>
 @foreach($about as $abt)
   <h1>{{$abt->title}}</h1>
   <p>{{$abt->about}}</p>
@@ -188,7 +195,7 @@ $count=1;
 @endforeach
 </div>
 <div id="musabaha" class="container-fluid bg-secondary text-white" style="padding:100px 20px;">
-  @foreach($musabaha as $musabaha)
+  @foreach($musabahas as $musabaha)
     <table class="table">
       <thead>
         <tr>
@@ -212,7 +219,12 @@ $count=1;
 
       </tbody>
     </table>
+
+    
   @endforeach
+  <span> 
+    {{$musabahas->links()}}
+  </span>
   </div>
 
 

@@ -34,12 +34,18 @@ class FrontendController extends Controller
          $data['portfolio'] = Portfolio::all();
          $data['about'] = About::all();
          $data['contact'] = Contact::all();
-         $data['musabaha'] = Musabaha::all();
+         $data['musabahas'] = Musabaha::paginate(15);
 
          
         
     return view('welcome',$data);
     }
+
+    public function search($name){
+       
+          return Musabaha::where('name','like',"%".$name."%")->get();
+        
+     }
 
     
 }

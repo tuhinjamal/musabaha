@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::group(['namespace'=>'App\Http\Controllers\frontend',],function(){
     Route::get('/','FrontendController@view');
+    Route::get('/search/{name}','FrontendController@search');
 });
 
 Route::view('home','home')->middleware('auth');
