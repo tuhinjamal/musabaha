@@ -13,6 +13,7 @@ $count=1;
 
 
 <link rel="icon" type="image/png" href="{{ asset('frontend/assets/favicon.ico') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <!-- Bootstrap Icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Google fonts-->
@@ -184,50 +185,38 @@ $count=1;
 
 
 <div id="section2" class="container-fluid bg-secondary text-white" style="padding:100px 20px;">
-  <form class="form-inline" action=" {{url('/search')}} ">
-    <input class="form-control mr-sm-2" type="search" name="search" value=" {{"/search"}} " placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
-  </form>
-@foreach($about as $abt)
-  <h1>{{$abt->title}}</h1>
-  <p>{{$abt->about}}</p>
   
-@endforeach
-</div>
-<div id="musabaha" class="container-fluid bg-secondary text-white" style="padding:100px 20px;">
-  @foreach($musabahas as $musabaha)
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">name</th>
-          <th scope="col">para</th>
-          <th scope="col">sura</th>
-          <th scope="col">ayat</th>
-          <th scope="col">description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">{{$musabaha->id}}</th>
-          <td>{{$musabaha->name}}</td>
-          <td>{{$musabaha->para}}</td>
-          <td>{{$musabaha->sura}}</td>
-          <td>{{$musabaha->ayat}}</td><br>
-          {{$musabaha->description}}
-        </tr>
 
-      </tbody>
-    </table>
+<br />
+  <div class="container box">
+   <h3 align="center">Live search in search of similer verses using AJAX</h3><br />
+   <div class="panel panel-default">
+    <div class="panel-heading">Search similer verses</div>
+    <div class="panel-body">
+     <div class="form-group">
+      <input type="text" name="search" id="search" class="form-control" placeholder="Search Customer Data" />
+     </div>
+     <div class="table-responsive">
+      <h3 align="center">Total Data : <span id="total_records"></span></h3>
+      <table class="table table-striped table-bordered">
+       <thead>
+        <tr>
+         <th> Name</th>
+         <th>Para</th>
+         <th>Sura</th>
+         <th>Ayat </th>
+         <th>Description</th>
+        </tr>
+       </thead>
+       <tbody>
 
-    
-  @endforeach
-  <span> 
-    {{$musabahas->links()}}
-  </span>
+       </tbody>
+      </table>
+     </div>
+    </div>    
+   </div>
   </div>
-
-
+</div>
 
 <!-- Footer -->
 @foreach($contact as $contact)
@@ -312,3 +301,31 @@ $count=1;
 
 </body>
 </html>
+
+<script>
+$(document).ready(function(){
+
+ fetch_customer_data();
+
+ function fetch_customer_data(query = '')
+ {
+  $.ajax({
+   url:"{{ route('live_search.action') }}",
+   method:'GET',
+   data:{query:query},
+   dataType:'json',
+   success:function(data)
+   {
+    $('tbody').html(data.table_data);
+    $('#total_records').text(data.total_data);
+   }
+  })
+ }
+
+ $(document).on('keyup', '#search', function(){
+  var query = $(this).val();
+  fetch_customer_data(query);
+ });
+});
+</script>
+

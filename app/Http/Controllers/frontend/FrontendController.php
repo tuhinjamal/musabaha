@@ -41,11 +41,62 @@ class FrontendController extends Controller
     return view('welcome',$data);
     }
 
-    public function search($name){
-       
-          return Musabaha::where('name','like',"%".$name."%")->get();
-        
+     function action(Request $request)
+    {
+     if($request->ajax())
+     {
+      $output = '';
+      $query = $request->get('query');
+      if($query != '')
+      {
+       $data = DB::table('musabahas')
+         ->where('name', 'like', '%'.$query.'%')
+         ->orWhere('para', 'like', '%'.$query.'%')
+         ->orWhere('sura', 'like', '%'.$query.'%')
+         ->orWhere('ayat', 'like', '%'.$query.'%')
+         ->orWhere('description', 'like', '%'.$query.'%')
+         ->orderBy('id', 'desc')
+         ->get();
+         
+      }
+      else
+      {
+       $data = DB::table('musabahas')
+         ->orderBy('id', 'desc')
+         ->get();
+      }
+      $total_row = $data->count();
+      if($total_row > 0)
+      {
+       foreach($data as $row)
+       {
+        $output .= '
+        <tr>
+         <td>'.$row->name.'</td>
+         <td>'.$row->para.'</td>
+         <td>'.$row->sura.'</td>
+         <td>'.$row->ayat.'</td>
+         <td>'.$row->description.'</td>
+        </tr>
+        ';
+       }
+      }
+      else
+      {
+       $output = '
+       <tr>
+        <td align="center" colspan="5">No Data Found</td>
+       </tr>
+       ';
+      }
+      $data = array(
+       'table_data'  => $output,
+       'total_data'  => $total_row
+      );
+
+      echo json_encode($data);
      }
+    }
 
     
 }

@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::group(['namespace'=>'App\Http\Controllers\frontend',],function(){
     Route::get('/','FrontendController@view');
     Route::get('/search/{name}','FrontendController@search');
+   // Route::get('/live_search', 'FrontendController@index');
+Route::get('/live_search/action', 'FrontendController@action')->name('live_search.action');
+
 });
 
 Route::view('home','home')->middleware('auth');
